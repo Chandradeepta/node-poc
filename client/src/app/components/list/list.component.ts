@@ -8,7 +8,7 @@ import { StudentService } from 'src/app/services/student.service';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-  students = [];
+  students: Array<StudenModel> = [];
   constructor(private studentService: StudentService) { }
 
   ngOnInit(): void {
@@ -26,11 +26,11 @@ export class ListComponent implements OnInit {
 
   Edit(id: any) {
     this.studentService.shouldEdit.next(true);
-    this.studentService.editValues.next(this.students.filter(student => student['StudentID'] === id)[0])
+    this.studentService.editValues.next(this.students.filter(student => student.StudentID === id)[0])
   }
 
-  Delete(id: any){
-    this.studentService.delete(id).subscribe(data=>{
+  Delete(id: any) {
+    this.studentService.delete(id).subscribe(data => {
       data.success && this.getAllStudents();
     })
   }
